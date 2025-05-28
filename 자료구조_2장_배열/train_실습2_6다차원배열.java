@@ -44,18 +44,42 @@ public class train_실습2_6다차원배열 {
 			System.out.println("행렬 A,C는 equal 아니다");
 	}
 	static void inputData(int [][]data) {
-	
+		Random rnd = new Random();
+		
+		for (int i=0; i < data.length;i++) {
+			for (int j=0;j < data[i].length;j++) {
+				data[i][j] = rnd.nextInt(20);
+			}
+		}
 	}
 	static void showData(String msg, int[][]items) {
-
+		System.out.println("[" +msg + "]");
+		
+		for (int[] row : items) {
+			for (int x : row) {
+				System.out.print(x + " ");
+			}
+			System.out.println();
+		}
+		System.out.println();
+//		System.out.println(Arrays.deepToString(items));
 	}
+	
 	static boolean equals(int[][]a, int[][]b) {
 		//행렬 a,b의 행의 수, 열의 수가 같아야 하고 각 원소가 같아야 한다.
 
 	}
 	static int[][] addMatrix(int [][]X, int[][]Y) {
-
-	}
+		int [][] result = new int[X.length][X[0].length];
+		
+		for (int i=0;i<X.length;i++) {
+			for (int j=0;j<X[i].length;j++) {
+				result[i][j] = X[i][j] + Y[i][j];
+			}
+		}
+		return result;
+	} 
+	
 	static int[][] multiplyMatrix(int [][]X, int[][]Y) {
 
 		

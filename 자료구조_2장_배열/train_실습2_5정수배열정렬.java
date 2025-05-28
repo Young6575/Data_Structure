@@ -14,10 +14,10 @@ public class train_실습2_5정수배열정렬 {
 		int []data = new int[10];
 		inputData(data); //난수를 10 ~ 60 사이에 생성
 		showData("난수 입력", data);
-		/*
+		
 		sortData(data);
 		showData("정렬후", data);
-		*/
+		
 		reverse(data);//역순으로 재배치 - 정렬 아님 
 		showData("역순 재배치", data);
 
@@ -56,7 +56,12 @@ public class train_실습2_5정수배열정렬 {
 		
 	}
 	static void sortData(int []arr) {
-
+		
+			
+		int[] a = new int[arr.length];
+		
+		
+		
 	}
 	static void reverse(int[] a) {//교재 67페이지
 	
@@ -97,27 +102,21 @@ public class train_실습2_5정수배열정렬 {
 		
 		for (int x : data) {
 			
-			if(data[data.length-1] < value)
-				newData[newData.length-1]=value;
-				
-			
 			if (value > prevalue & value < x) {
 			newData[num]=value;
 			newData[num+1]=x;
 			num = num + 2;
-			
 			} else {
 				newData[num] = x;
 				num ++;
 			}
 
-				
-			prevalue =x;
-					
+			if(data[data.length-1] < value)
+				newData[newData.length-1]=value;	
 			
+			prevalue =x;
 		}
 		return newData;
-		
 	}
 
 
