@@ -23,14 +23,16 @@ package 자료구조_4장_스택과큐;
 */
 import java.util.*;
 
+import com.sun.tools.classfile.Annotation.element_value;
+
  class Charstack {
-	private char[] element;
+	private List<Character> element;
 	private int top; 
 	private int num;
 	private int size;
 	
 	public Charstack(int size) {
-		char[] element = new char[size];
+		element = new ArrayList<Character>(size);
 		top=0;
 		this.size=size;
 	}
@@ -41,17 +43,17 @@ import java.util.*;
 	
 	void push(char c) {
 		try {
-			for (int i=0;i<size;i++) {
-				element[i]=c;
-			}
+			element.add(c);
 			top++;			
 		} catch (Exception e) {
 			System.out.println("오류 발생");
 		}
 	}
 	
-	void pop() {
-		
+	public int pop() {
+		int result = element.get(--top);
+		element.remove(top);
+		return result;
 	}
 	
 }
