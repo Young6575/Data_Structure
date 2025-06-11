@@ -6,7 +6,7 @@ package 자료구조_5장_재귀알고리즘;
  * f(n) = f(n-1) + f(n-2)
  * f(n) = f(n-1) + f(n-2) + f(n-2)를 구현하는 실습: 현재 코드를 수정하여 완료 
  */
-// fibonacci(0) = 0 , fibonacci(1)=1 
+
 
 import java.util.Scanner;
 
@@ -21,7 +21,7 @@ public class 실습5_1_2피보나치수열 {
  public static void main(String[] args) {
      Scanner stdIn = new Scanner(System.in);
 
-     System.out.print("정수를 입력하세요: ");
+     System.out.print("정수를 입력하세요 : ");
      int x = stdIn.nextInt();
 
      System.out.println(x + "의 피보나치 수열은 " + fibonacci(x) + "입니다.");
