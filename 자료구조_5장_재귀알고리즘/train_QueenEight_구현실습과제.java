@@ -57,6 +57,10 @@ class Point {
 		return flag;
 	}
 
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
+
 }
 
 public class train_QueenEight_구현실습과제 {
@@ -66,12 +70,13 @@ public class train_QueenEight_구현실습과제 {
 		int numberOfSolutions = 0;
 		int count = 0;// 퀸 배치 갯수
 		int ix = 0, iy = 0;// 행 ix, 열 iy
+		boolean moved;
 		Stack<Point> stack = new Stack<>(); // 담을 스택만들기
 		Point p = new Point(ix, iy, 0);// 현 위치를 객체로 만들고
 		d[ix][iy] = 1;// 현 위치에 queen을 넣었다는 표시를 하고
 		count++;
-		ix++;//ix는 행별로 퀸 배치되는 것을 말한다.
-		iy = 0;//다음 행으로 이동하면 열은 0부터 시작
+		ix++; //ix는 행별로 퀸 배치되는 것을 말한다.
+		iy = 0; //다음 행으로 이동하면 열은 0부터 시작
 		stack.push(p);// 스택에 현 위치 객체를 push
 
 		while (true) {
@@ -79,21 +84,21 @@ public class train_QueenEight_구현실습과제 {
 			if (stack.isEmpty() && ix == 8) // ix가 8이면 8개 배치 완료, stack이 empty가 아니면 다른 해를 구한다
 				break;
 
-
-
-					if ((iy = nextMove(d, ix, iy)) == -1) {// 다음 이동할 열을 iy로 주는데 -1이면 더이상 이동할 열이 없음을 나타냄
+				Point currentPoint = stack.peek();
+				
+				
+					int Moveresult = nextMove(d, ix, iy);
+					if (Moveresult == -1) {// 다음 이동할 열을 iy로 주는데 -1이면 더이상 이동할 열이 없음을 나타냄
+						
 						stack.pop();
-						d[ix][iy]=0;
+						d[currentPoint.getIx()][currentPoint.getIy()]=0;
 						count--;
 					} else {
-						stack.push(new Point(ix,iy,0));
-						d[ix][iy]=++count;
+						stack.push(new Point(Moveresult,iy,0));
+						currentPoint.setFlag(Moveresult+1);
+						d[Moveresult][iy]=count++;
 					}
-				
-					Point currentPoint = stack.peek();
-	
-			
-			// push()
+
 			if (count == 8) { // 8개를 모두 배치하면
 				numberOfSolutions++;
 			}
@@ -173,10 +178,10 @@ public class train_QueenEight_구현실습과제 {
 
 	// 배열 d에서 현재 위치(row,col)에 대하여 다음에 이동할 위치 nextCol을 반환, 이동이 가능하지 않으면 -1를 리턴
 	public static int nextMove(int[][] d, int row, int col) {// 현재 row, col에 대하여 이동할 col을 return
-		if (checkMove(d, row, col))
-			return col;
-		else
-			return -1;
+		for (int i=col;i<d[0].length;i++) {
+			if (checkMove(d, row,i)) return i;
+		}
+		return -1;
 	}
 
 	static void showQueens(int[][] data) {// 배열 출력

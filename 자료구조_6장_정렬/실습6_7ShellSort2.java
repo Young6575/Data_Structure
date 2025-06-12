@@ -1,4 +1,5 @@
-package Chap6_Sorting;
+
+package 자료구조_6장_정렬;
 //비교횟수가 아닌 동작 과정을 이해하기 위한 버젼
 
 import java.util.Random;

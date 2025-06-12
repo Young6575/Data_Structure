@@ -1,4 +1,4 @@
-package Chap6_Sorting;
+package 자료구조_6장_정렬;
 
 import java.util.Random;
 
