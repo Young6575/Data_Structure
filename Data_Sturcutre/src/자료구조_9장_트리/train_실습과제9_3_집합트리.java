@@ -1,4 +1,4 @@
-package Chap9_Tree;
+package 자료구조_9장_트리;
 /*
  * 집합 트리
  * 집합 원소를 제거하는 delete() 추가, 집합 세트를 출력하는 displaySets()를 추가함
@@ -55,6 +55,11 @@ class Sets3 {
         i = simpleFind(i);
         j = simpleFind(j);
         if (i == j) return;
+        
+        if (parent[i] > parent[j]) // i 집합의 갯수가 j보다 적다는 의미
+        	parent[i] = parent[j];
+        else if (parent[i] < parent[j]) 
+        	parent[j] = parent[i];
 
     }
     //void difference() 차집합 -  이 문제는 disjoint set을 가정하므로 가정 변경이 필요

@@ -24,22 +24,25 @@ class Offsets {
 public class train_실습_미로찾기실습과제 {
 
 	static Offsets[] moves = new Offsets[8];//static을 선언하는 이유를 알아야 한다
-	int maze[14][17];
-	int mark[14][17];
 
-	void path(int maze[][], int mark[][], int m, int p)//m = 12, p = 15
+
+	void path(int maze[][], int mark[][], int m, int p) {//m = 12, p = 15
 	//출발점 (1,1), 이동 방향 dir = 2(2는 동쪽) 을 스택에 push
-	initialize stack to the maze entrance coordinates and direction east;
+	//initialize stack to the maze entrance coordinates and direction east;
+		
+		
+
+		
 	while (stack is not empty)
 	{
-	(i,j,dir) = coordinates and direction deleted from top of stack;
-	현재 위치 (i,j)에 대하여 mark[][]을 1로 설정
+	//(i,j,dir) = coordinates and direction deleted from top of stack;
+	//현재 위치 (i,j)에 대하여 mark[][]을 1로 설정
 	   while (there are more moves)//8가지 방향중에서 남은 방향에 대하여
 	   {
 	      (g,h) = coordinates of next move;//현재 위치 (i,j)에 대하여 이동 방향 계산
 	      if ((g == m) && (h == p)) {
 	//success;
-	(i,j)와 (g,h)에 대하여 mark 표시
+	//(i,j)와 (g,h)에 대하여 mark 표시
 	return;
 	}
 	      if ((!maze[g][h]) //legal move
@@ -53,10 +56,21 @@ public class train_실습_미로찾기실습과제 {
 	      else
 	          d++; //try next direction
 	   }
-	   (i,j) 현위치에 대한 mark를 취소
+	  // (i,j) 현위치에 대한 mark를 취소
 	}
-	cout << "No path found" << endl;
+//	cout << "No path found" << endl;
 
+	}
+	
+	static void show(String msg,int[][] map) {
+		System.out.println(msg);
+		for (int[] row : map) {
+			
+			for (int x : row) {
+				System.out.print(x + " | ");
+			}
+			System.out.println();
+		}
 	}
 
 	public static void main(String[] args) {
@@ -77,7 +91,7 @@ public class train_실습_미로찾기실습과제 {
 				{ 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0 },
 				{ 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0 }};
 		for (int ia = 0; ia < 8; ia++)
-			moves[ia] = new Offsets(0, 0);//배열에 offsets 객체를 치환해야 한다.
+			moves[ia] = new Offsets();//배열에 offsets 객체를 치환해야 한다.
 		moves[0].a = -1;	moves[0].b = 0;
 		moves[1].a = -1;	moves[1].b = 1;
 		moves[2].a = 0;		moves[2].b = 1;
@@ -92,14 +106,17 @@ public class train_실습_미로찾기실습과제 {
 		for (int i = 0; i < 14; i++) {
 			for (int j = 0; j < 17; j++) {
 				//input[][]을 maze[][]로 복사
-
+				if (i == 0 || i == 13 || j ==0 || j==16)
+					maze[i][j] = 1;
+				if (i < input.length && j < input[0].length)
+					maze[i+1][j+1] = input[i][j];
 			}
 		}
 
 		show("maze[12,15]::", maze);
 		show("mark[12,15]::", mark);
 
-		path(maze, mark, 12, 15);
+	//	path(maze, mark, 12, 15);
 		show("maze[12,15]::", maze);
 		show("mark[12,15]::", mark);
 

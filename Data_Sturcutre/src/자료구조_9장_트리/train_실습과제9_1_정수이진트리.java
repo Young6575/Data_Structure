@@ -193,7 +193,10 @@ class Tree5 {
 	}
 
 	boolean isLeafNode(TreeNode5 current) {//current 가 leaf node 인지 조사 
-
+		if ((current.LeftChild == null) && (current.RightChild == null))
+			return true;
+		else
+			return false;
 	}
 
 	void inorder() {//main에서 호출되는 driver function
@@ -287,13 +290,9 @@ class Tree5 {
 				q = p;
 				p = p.LeftChild;
 			}
-			else if (x > p.data) {
-				q= p;
-				p = p.RightChild;
+			
 			}
 		}
-		q.LeftChild
-		
 	}
 
 	boolean delete(int num) {//binary search tree에서 임의 값을 갖는 노드를 찾아 삭제한다.
@@ -301,10 +300,46 @@ class Tree5 {
 		//삭제 대상이 leaf node인 경우, non-leaf node로 구분하여 구현한다 
 		TreeNode5 p = root, q = null, parent = null;
 		int branchMode = 0; // 1은 left, 2는 right
-		
-		return false;
+		while (p!=null) {
+			if (num > p.data) {
+				q= p;
+				p = p.RightChild;
+				branchMode = 1;
+			}
+			else if (num < p.data) {
+				q = p;
+				p = p.LeftChild;
+				branchMode = 2;
+			}
+			else {// 삭제할 값
+				//삭제
+				if (isLeafNode(p)==true) {
+					if (branchMode == 1)
+						q.LeftChild = null;
+					else
+						q.RightChild = null;
+				}
+			} else {
+				if (isOneChild(p) == ture) {
+					
+				} else {
+					//child가 2개인 경우
+					//inorder successor를 구하여 replace한다.
+					TreeNode5 succ = inorderSucc(p);
+					p.data = succ.data;
+					//delete(succ);
+					//non-recursive 삭제시에는 p,q를 사용하는 것이
+				}
+			}
 
 	}
+		
+		
+		
+		
+		
+		
+		
 
 	boolean search(int num) {//num 값을 binary search tree에서 검색
 		TreeNode5 p = root;
