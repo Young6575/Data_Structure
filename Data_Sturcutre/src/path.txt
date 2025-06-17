@@ -1,0 +1,62 @@
+    static void path(int maze[][], int mark[][], int m, int p) {// m = 12, p = 15
+        // 출발점 (1,1), 이동 방향 dir = 0(0는 북쪽) 을 스택에 push
+        int x = 1;
+        int y = 1;
+        int dir = 0;
+        Items item = new Items(x, y, dir);
+        stack.push(item);
+        mark[x][y] = 3;
+        boolean moved;
+        int count = 4;
+        
+        while (!stack.isEmpty()) {
+            // 출구에 도달했는지 확인 (12, 15)
+            if (x == 12 && y == 15) {
+                System.out.println("출구에 도달했습니다!");
+                break;
+            }
+            
+            moved = false;
+            // 현재 위치에서 8방향 탐색
+            while (dir < 8) {
+                int nextX = x + moves[dir].a;
+                int nextY = y + moves[dir].b;
+                
+                // 경계 체크 및 이동 가능한지 확인
+                if (nextX >= 0 && nextX < 14 && nextY >= 0 && nextY < 17 &&
+                    maze[nextX][nextY] != 1 && mark[nextX][nextY] == 0) {
+                    moved = true;
+                    break;
+                }
+                dir++;
+            }
+            
+            if (moved) {
+                // 이동 가능한 방향을 찾았을 때
+                x = x + moves[dir].a;
+                y = y + moves[dir].b;
+                stack.push(new Items(x, y, 0)); // 새 위치에서는 방향을 0부터 시작
+                mark[x][y] = count++;
+                dir = 0; // 새 위치에서 방향 초기화
+            } else {
+                // 이동할 수 없을 때 백트래킹
+                if (stack.size() > 1) {
+                    stack.pop();
+                    Items pre = stack.peek();
+                    x = pre.x;
+                    y = pre.y;
+                    dir = pre.dir + 1;
+                    // 현재 스택의 top 항목의 방향을 업데이트
+                    stack.pop();
+                    stack.push(new Items(x, y, dir));
+                } else {
+                    // 스택에 시작점만 남았을 때
+                    break;
+                }
+            }
+        }
+        
+        if (stack.isEmpty() || (x != 12 || y != 15)) {
+            System.out.println("출구를 찾을 수 없습니다!");
+        }
+    }
