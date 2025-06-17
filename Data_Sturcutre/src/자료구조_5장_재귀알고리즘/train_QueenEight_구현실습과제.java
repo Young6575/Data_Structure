@@ -1,7 +1,7 @@
 package 자료구조_5장_재귀알고리즘;
 
 import java.util.Stack;
-//
+//실습
 
 //https://www.geeksforgeeks.org/n-queen-problem-backtracking-3/?ref=lbp
 //N Queen problem / backtracking
