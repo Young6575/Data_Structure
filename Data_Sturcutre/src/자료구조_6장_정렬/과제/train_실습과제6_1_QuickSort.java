@@ -47,20 +47,33 @@ public class train_실습과제6_1_QuickSort {
 		Stack<Point> st = new Stack<>();
 		Point pt = new Point(left, right);
 		st.push(pt);
-		int pl = left;
-		int pr = right;
-		int mid = pr/2;
+
+		
+		while (!st.isEmpty()) {
+			
+		Point pt2 = st.pop();
+		
+		int pl = pt2.getX();
+		int pr = pt2.getY();
+		int mid = (pt2.getX()+pt2.getY())/2;
+		int pivotvalue = a[mid];
 		
 		do {
-			while (a[pl] < a[mid]) pl++; 
-			while (a[pr] > a[mid]) pr--;
+	
+			while (a[pl] < pivotvalue) pl++;
+			while (a[pr] > pivotvalue) pr--;
 			
-			if (pl <=pr) swap(a,pl++,pr--);
+			if(pl <= pr)
+			swap(a,pl++,pr--);
+			
+			
 		} while (pl <= pr);
 
-		if (left <pr) quickSort(a,left,pr);
-		if (right > pl)	quickSort(a,pl,right);
+		if (pl < pt2.getY()) st.push(new Point(pl,pt2.getY()));
+		if (pr > pt2.getX()) st.push(new Point(pt2.getX(),pr));
 		
+		
+		}
 		
 	}
 
