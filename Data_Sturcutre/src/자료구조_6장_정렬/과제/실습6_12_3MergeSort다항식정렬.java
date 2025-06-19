@@ -8,29 +8,67 @@ class Polynomial3 implements Comparable<Polynomial3>{
     int    exp;            // 지수
 
     Polynomial3(){}
+    
     //--- 생성자(constructor) ---//
     Polynomial3(double coef, int exp) {
-        this.coef = coef;  this.exp = exp; 
+        this.coef = coef;  
+        this.exp = exp; 
+    }
+    
+    @Override
+    public int compareTo(Polynomial3 o) {
+    	return Integer.compare(this.exp, o.exp);
     }
 
 }
+
+
 public class 실습6_12_3MergeSort다항식정렬 {
 
 	// --- 배열 요소 a[idx1]와 a[idx2]의 값을 교환 ---//
 	static void merge(Polynomial3[] a, int lefta, int righta, int leftb, int rightb ) {
-		 //body를 지우고 작성 훈련 연습이 도움이 된다 
+		
+		//body를 지우고 작성 훈련 연습이 도움이 된다 
 		Polynomial3 temp[] = new Polynomial3[30];
+		int i = lefta;
+		int j = leftb;
+		int k = 0;
 		//구현코드
+		
+		// 1. 두 배열을 1대1로 비교
+		while (i <= righta && j <= rightb) {
+			//a[i]가 차수가 같거나 더 큰 경우
+			if (a[i].compareTo(a[j]) > 0) {
+				temp[k++] = a[i++];
+			} 
+			//a[i]가 차수가 작은 경우
+			else temp[k++] = a[j++];
+		}
+		
+		// 2. 1대1 비교 후 뒤에 하나가 남을 경우 temp 뒤에 붙여넣기
+		while (i <= righta) {
+			temp[k++] = a[i++];
+		}
+		
+		while (j <= rightb) {
+			temp[k++] = a[j++];
+		}
+		
+		// 3. type이 void이니 a[]에 정렬 된 temp[]를 넣어주기
+		for (i = 0; i <k; i++) {
+			a[lefta + i] = temp[i];
+		}
 	}
 
 	// --- 퀵 정렬(비재귀 버전)---//
 	static void MergeSort(Polynomial3[] a, int left, int right) {
 		int mid = (left+right)/2;
-		if (left == right) return;
+		if (left == right) 
+			return;
 		MergeSort(a, left, mid);
 		MergeSort(a, mid+1, right);
 		merge(a, left, mid, mid+1, right);
-		return;
+			return;
 	}
 	static void ShowPolynomial(String str, Polynomial3[] x, int count) {
 		//str 변수는 다항식 이름으로 스트링이다
@@ -42,12 +80,32 @@ public class 실습6_12_3MergeSort다항식정렬 {
 		else
 			n = count;
 		//구현코드
+		System.out.print(str);
+		for (int i=0; i < n; i++) {
+			//지수 0일 경우
+			if (i == n-1) 
+				System.out.print(x[i].coef);
+			else 
+				System.out.print(x[i].coef +"x**"+x[i].exp + " + ");
+		}
+		System.out.println();
 	}
 	static int AddPolynomial(Polynomial3[]x,Polynomial3[]y,Polynomial3[]z) {
 		//z = x + y, 다항식 덧셈 결과를 z로 주고 z의 항의 수 terms을 리턴한다 
 		int p=0,q=0,r=0;
 		int terms = 0;
 		//구현코드
+		// 1. 1대1 비교
+		while (p < x.length && q < y.length ) {
+			
+			// x 지수가 클 때
+			if (x[p].compareTo(y[q]) > 0) {
+				terms = addTerm(z, x[p], terms);
+			}
+			
+		}
+		
+		
 		return terms;
 		
 	}
@@ -55,6 +113,8 @@ public class 실습6_12_3MergeSort다항식정렬 {
 		//다항식 z에 새로운 항 term을 추가한다. 지수가 같은 항이 있으면 계수만 합한다
 		//추가된 항의 수를 count하여 terms으로 리턴한다.
 		//구현코드
+		
+		
 		return ++terms;
 			
 	}
