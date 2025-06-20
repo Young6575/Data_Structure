@@ -37,11 +37,11 @@ public class 실습6_12_3MergeSort다항식정렬 {
 		
 		// 1. 두 배열을 1대1로 비교
 		while (i <= righta && j <= rightb) {
-			//a[i]가 차수가 같거나 더 큰 경우
+			//a[i]가 차수가 더 큰 경우
 			if (a[i].compareTo(a[j]) > 0) {
 				temp[k++] = a[i++];
 			} 
-			//a[i]가 차수가 작은 경우
+			//a[i]가 차수가 작거나 같은 경우
 			else temp[k++] = a[j++];
 		}
 		
@@ -98,13 +98,18 @@ public class 실습6_12_3MergeSort다항식정렬 {
 		// 1. 1대1 비교
 		while (p < x.length && q < y.length ) {
 			
-			// x 지수가 클 때
-			if (x[p].compareTo(y[q]) > 0) {
-				terms = addTerm(z, x[p], terms);
-			}
-			
+			//x 지수가 큰 경우
+			if (x[p].compareTo(y[q]) > 0) 
+				terms = addTerm(z, x[p++], terms);
+			// 그 외의 경우
+			else
+				terms = addTerm(z, y[q++], terms);
 		}
 		
+		// 2. 남은 부분 더하기
+
+		while (p < x.length) addTerm(z, x[p++], terms);
+		while (q < y.length) addTerm(z, y[q++], terms);
 		
 		return terms;
 		
@@ -114,6 +119,14 @@ public class 실습6_12_3MergeSort다항식정렬 {
 		//추가된 항의 수를 count하여 terms으로 리턴한다.
 		//구현코드
 		
+		for (int i=0; i < terms;i++) {
+			if (z[i].exp == term.exp) {
+				z[i].coef += term.coef;
+				return terms; 
+			}
+		}
+		
+		z[terms] = term;
 		
 		return ++terms;
 			
