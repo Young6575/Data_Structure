@@ -86,21 +86,24 @@ class Heap implements MaxHeap {
 
 		int x = heap[1]; //반환값
 		int lastE = heap[n];
+		heap[1] = lastE;
 		n--;
 		
 		int i = 1; // 루트
 		int j = 2; // 왼쪽
-
+		int comp;
 		while (j <= n) {
-			// 오른쪽 자식이 존재하고, 오른쪽 자신이 크면 
-			if (j < n && heap[j] < heap[j+1]) {
+			// 오른쪽 자식이 존재하고, 오른쪽이 더 크면 
+			if (j+1 <= n && heap[j] < heap[j+1]) {
 				j++;
-			}
+			} 
+			
 			
 			// 마지막 원소가 자식보다 크거나 같으면 적절한 위치
 			if (lastE >= heap[j]) {
 				break;
 			}
+			
 			
 			//자식을 위로 이동
 			heap[i] = heap[j];
@@ -108,51 +111,10 @@ class Heap implements MaxHeap {
 			j = 2 *i;
 			
 		}
-		
 		heap[i] = lastE;
-		
-		
-		
-		
-		
-		
-		
-		int comp;
-		int temp;
-		// 1. 공간을 작게 만들어야 됨
-		heap[1] = heap[n];
-		n--;
-		// 2. i,j 루트(i)와 왼쪽(j)
-		
-		
-		
-		// 3. 재배치를 시작
-		x = heap[1];
-		
-		while (i > 1 && i < n) {
-			j = i*2;
-			// 3-1. 오른쪽 자식이 존재하고, 왼쪽 자식보다 큰가?
-			if (heap[j+1] > 0 && heap[j] < heap[j+1] ) comp = j+1;
-			else comp = j;
-			// 큰 값을 부모와 비교
-			if (heap[comp] > heap[i]) {
-				temp = heap[i];
-				heap[i] = heap[comp];
-				heap[comp] = temp;
-				
-				i = j;
-			} else return x;
-			
-			
-			// 3-2. 마지막 원소가 자식보다 크거나 같은가?
-			
-		// 3-3. 자식을 위로 이동
-			
-			
-		}	
-		// 4. 적절한 위치에 특정 값을 배치
 		return x;
 	}
+}
 public class train_실습과제6_4_heap_정렬 {
 	 static void showData(int[] d) {
 		 for (int i=0;i<d.length;i++) {
@@ -169,7 +131,7 @@ public class train_실습과제6_4_heap_정렬 {
 	    final int count = 10;//난수 생성 갯수
 	    int[] x = new int[count+1];//x[0]은 사용하지 않으므로 11개 정수 배열을 생성한다 
 	    
-	    for (int v=0;v<x.length;v++) {
+	    for (int v=1;v<x.length;v++) {
 	    	x[v] = rnd.nextInt(30);
 	    }
 	    
@@ -181,7 +143,8 @@ public class train_실습과제6_4_heap_정렬 {
 			select = stdIn.nextInt();
 			switch (select) {
 			case 1://난수를 생성하여 배열 x에 넣는다 > heap에 insert한다.
-
+				for (int i =1; i < x.length;i++)
+					heap.Insert(x[i]);
 			     showData(x);
 				break;
 			case 2:	//heap 트리구조를 배열 인덱스를 사용하여 출력한다.
@@ -193,9 +156,6 @@ public class train_실습과제6_4_heap_정렬 {
 			        // 그 값을 sorted 배열에 순서대로 저장합니다.
 			        sorted[i] = heap.DeleteMax();
 			    }
-			    
-				
-				
 				showData(sorted);
 				break;
 
