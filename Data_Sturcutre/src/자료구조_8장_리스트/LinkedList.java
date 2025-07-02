@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 public class LinkedList<E> {
  //--- 노드 ---//
- class Node<E> {
+ public class Node<E> {
      private E data;              // 데이터
      private Node<E> next;        // 뒤쪽 포인터(다음 노드에 대한 참조)
 

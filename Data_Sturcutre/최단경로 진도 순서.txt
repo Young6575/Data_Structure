@@ -1,0 +1,4 @@
+1. 최단거리 [if, 중첩된 반복문]
+2. 이중연결리스트(**) [Ref, merge, add..]
+3. 집합트리 구현 [merge]
+4. "spanningtree" 
