@@ -42,6 +42,8 @@ public class DoubledLinkedList2 {
 		newNode.setData(obj);
 		Node4 current = first.getRlink();
 		
+		
+		
 		while (c.compare(obj, current.getData()) >= 0) {
 			current = current.getRlink();
 		}
