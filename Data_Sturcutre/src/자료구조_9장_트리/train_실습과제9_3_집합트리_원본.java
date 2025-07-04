@@ -16,6 +16,8 @@ class Sets2 {
     }
     void displaySets() {
     	//{1,2,3} 등으로 set을 표시하기
+    	
+    	
 
     }
     public void display() {
