@@ -1,4 +1,4 @@
-package Chap11_그래프;
+package 자료구조_그래프.과제;
 
 import java.util.*;
 
@@ -10,17 +10,21 @@ class Edge3 implements Comparable<Edge3> {
     public Edge3() {}
 
     public Edge3(int src, int dest, int weight) {
-
+    	super();
+    	this.src = src;
+    	this.dest = dest;
+    	this.weight= weight;
+    			
     }
 
     @Override
-    public String toString() {
+	public String toString() {
+		return "Edge3 [src=" + src + ", dest=" + dest + ", weight=" + weight + "]";
+	}
 
-    }
-
-    @Override
+	@Override
     public int compareTo(Edge3 e) {
-
+		return Integer.compare(this.weight, e.)
     }
 }
 
@@ -55,22 +59,36 @@ class Sets {
     public void union(int x, int y) {
 
     }
+    
+    public void delete(int n) {
+    	if (n <0 || n)
+    }
 }
 public class train_실습과제11_3최소spanningtree_리스트 {
-    static void KruskalMST(Graph_MST graph) {
-        int n = graph.n;
+    static void KruskalMST(int[][] matrix) {
+    	int n = matrix.length;
+    	
+    	
         List<Edge3> listEdges = new ArrayList<>();
 
         // 모든 간선을 리스트에 추가
         for (int i = 0; i < n; i++) {
- 
+        	for (int j = i+1; j <n;j++) {
+        		if(matrix[i][j] != 0) {
+        			edge.add(new Edge(i,j,matrix[i][j]));
+        		}
+        	}
+        }
+        System.out.println("==간선출력==");
+        for (Edge3 edge : listEdges) {
+        	System.out.println(edge);
         }
 
         // Arrays.sort()를 사용하여 간선을 가중치 기준으로 정렬
-
+        Collections.sort(listEdges);
 
         // Kruskal 알고리즘을 위한 Disjoint Set 초기화
-        Sets ds = new Sets(n);
+        Setstree  ds = new SetsTree(n);
         List<Edge3> mst = new ArrayList<>();
 
         for (Edge3 edge : edgeArray) {
